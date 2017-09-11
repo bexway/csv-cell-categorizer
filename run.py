@@ -3,8 +3,9 @@ import Tkinter as tk
 import tkFileDialog
 
 def main():
-    # I'll use regexes to match the favorite subject to the
-    patterns = ["[tT]est ?1", "[Pp]atterns?", "([Tt]hree)|3"]
+    # I'll use regexes to match the favorite subject to the pattern
+    # TODO: add file reading for patterns, and add a corresponding title (what should be written to the output) to the list
+    patternList = ["[tT]est ?1", "[Pp]atterns?", "[Mm]ath"]
 
     inputFile = open("database.csv", 'rb')
     inputReader = csv.DictReader(inputFile)
@@ -17,8 +18,15 @@ def main():
     outputWriter.writeheader()
     
     for row in inputReader:
-        #placeholder to make sure it's reading right
-        print row
+        inputSubjects =  row["Favorite Subject(s)"]
+        outputSubjects = []
+        for pattern in patternList:
+            re = regex.compile(pattern)
+            if re.search(inputSubjects):
+                outputSubjects.append(pattern)
+
+        print inputSubjects
+        print outputSubjects
 
     inputFile.close()
     outputFile.close()
