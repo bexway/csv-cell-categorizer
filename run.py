@@ -28,8 +28,25 @@ def main():
         print inputSubjects
         print outputSubjects
 
+    box = DialogBox()
+    box.mainloop()
+
     inputFile.close()
     outputFile.close()
+
+class DialogBox(tk.Tk):
+    def __init__(self):
+        """Open a dialog box for submitting majors"""
+        tk.Tk.__init__(self)
+        self.label = tk.Label(self, text="Test", wraplength=600)
+        self.label.pack()
+
+        self.button = tk.Button(self, text="Submit", command=self.submit)
+        self.button.pack(side = tk.BOTTOM)
+
+    def submit(self):
+        self.quit()
+        self.withdraw()
 
 if __name__ == "__main__":
     main()
