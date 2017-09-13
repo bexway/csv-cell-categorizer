@@ -29,7 +29,6 @@ def main():
         print outputSubjects
 
     box = DialogBox()
-    box.mainloop()
 
     inputFile.close()
     outputFile.close()
@@ -43,6 +42,23 @@ class DialogBox(tk.Tk):
 
         self.button = tk.Button(self, text="Submit", command=self.submit)
         self.button.pack(side = tk.BOTTOM)
+
+        #Next, set up the dialog box and run it
+        #box sizing: https://stackoverflow.com/questions/14910858/how-to-specify-where-a-tkinter-window-opens
+        
+        ws = self.winfo_screenwidth() # width of the screen
+        hs = self.winfo_screenheight() # height of the screen
+
+        # width and height of tK window; scaled based on screen size
+        w = ws/1.5
+        h = hs/1.5
+
+        # calculate x and y coordinates for the Tk root window
+        x = (ws/2) - (w/2)
+        y = (hs/2) - (h/2)
+        # set the dimensions of the screen and where it is placed
+        self.geometry('%dx%d+%d+%d' % (w, h, x, y))
+        self.mainloop()
 
     def submit(self):
         self.quit()
